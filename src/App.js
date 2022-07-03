@@ -48,7 +48,6 @@ function App() {
             p.data=p.data.slice(Math.max(p.data.length - 30, 1))
             a.data.pop()
             a.time.pop()
-            console.log(p.data[0].x-1)
 
         //   p.x=p.x.slice(Math.max(p.length - 99, 0));
         //   p.y=p.y.slice(Math.max(p.length - 99, 0));

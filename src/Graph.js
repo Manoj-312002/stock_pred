@@ -36,7 +36,6 @@ const max= (a,b)=>{
 const actual=val.actual.data;
 const predicted=val.predicted.data;
 const time=val.time;
-console.log("From Graph :",val )
 const chartColors = {
   red: "rgb(255, 99, 132)",
   blue: "rgb(54, 162, 235)"
@@ -75,7 +74,6 @@ const options = {
             callbacks: {
               label: function(tooltipItem) {                
                 var index = tooltipItem.index
-                console.log(tooltipItem)
                 return tooltipItem.yLabel+"@Time "+time[index];
               }
             }
