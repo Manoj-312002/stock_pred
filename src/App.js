@@ -34,33 +34,6 @@ function App() {
 //   }
  
 
-    const populateData = async () => {
-       if(name==null)return;
-       fetch(API)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          var p =filterTheData(result[0],30);
-        
-          var a =filterTheData(result[1],30);
-          
-        //   Removing as they are out of allign ment by one element
-            p.data=p.data.slice(Math.max(p.data.length - 30, 1))
-            a.data.pop()
-            a.time.pop()
-
-        //   p.x=p.x.slice(Math.max(p.length - 99, 0));
-        //   p.y=p.y.slice(Math.max(p.length - 99, 0));
-        //   a.x.pop();
-        //   a.y.pop();
-        
-
-        setStockPrice({actual:a,predicted:p, minT:a.data[0].x-1,maxT:p.data[0].x+30,time:a.time});
-        }
-      ).catch(()=>{
-        console.log("API Down")
-      })
-    }
 
     // function reassignName(){
     //     populateData();
@@ -71,14 +44,68 @@ function App() {
     const TIME_MS = 10000;
 
     useEffect(()=>{
+      const populateData2 = async () => {
+        if(name==null)return;
+        fetch(API)
+       .then(res => res.json())
+       .then(
+         (result) => {
+           var p =filterTheData(result[0],30);
+         
+           var a =filterTheData(result[1],27);
+           
+         //   Removing as they are out of allign ment by one element
+             p.data=p.data.slice(Math.max(p.data.length - 30, 1))
+             a.data.pop()
+             a.time.pop()
+ 
+         //   p.x=p.x.slice(Math.max(p.length - 99, 0));
+         //   p.y=p.y.slice(Math.max(p.length - 99, 0));
+         //   a.x.pop();
+         //   a.y.pop();
+         
+ 
+         setStockPrice({actual:a,predicted:p, minT:a.data[0].x-1,maxT:p.data[0].x+30,time:a.time});
+         }
+       ).catch(()=>{
+         console.log("API Down")
+       })
+     }
         const interval = setInterval(() => {
-            populateData();
+            populateData2();
             console.log("Re-reendering graph")
         }, TIME_MS);
         return () => clearInterval(interval);
     },[])
 
     useEffect(()=>{
+      const populateData = async () => {
+        if(name==null)return;
+        fetch(API)
+       .then(res => res.json())
+       .then(
+         (result) => {
+           var p =filterTheData(result[0],30,-1);
+         
+           var a =filterTheData(result[1],27);
+           
+         //   Removing as they are out of allign ment by one element
+             p.data=p.data.slice(Math.max(p.data.length - 30))
+             a.data.pop()
+             a.time.pop()
+ 
+         //   p.x=p.x.slice(Math.max(p.length - 99, 0));
+         //   p.y=p.y.slice(Math.max(p.length - 99, 0));
+         //   a.x.pop();
+         //   a.y.pop();
+         
+ 
+         setStockPrice({actual:a,predicted:p, minT:a.data[0].x-1,maxT:p.data[0].x+30,time:p.time});
+         }
+       ).catch(()=>{
+         console.log("API Down")
+       })
+     }
         populateData();
     },[name])
     return (

@@ -32,7 +32,7 @@ const max= (a,b)=>{
 // const keys=getKeys(val.predicted);
 // const actual=getValues(val.actual);
 // const predicted=getValues(val.predicted);
-
+console.log(val.time)
 const actual=val.actual.data;
 const predicted=val.predicted.data;
 const time=val.time;
